@@ -24,4 +24,8 @@ export class Connection {
     }
   }
 
+  dbConnector() {
+    return this.db;
+  }
+
 }
