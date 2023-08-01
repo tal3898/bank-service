@@ -22,10 +22,10 @@ export class TransactionManager {
             throw new Error('Transaction ' + transactionId + ' was not processed.')
         }
 
-        this.handleTransaction(transactionId, sourceBank, destBank, amount, currTransactionReport);
+        this.handleTransaction(sourceBank, destBank, amount, currTransactionReport);
     }
 
-    private handleTransaction(transactionId:string, sourceBank:string, destBank: string, amount:number, transactionReport: Report) {
+    private handleTransaction(sourceBank:string, destBank: string, amount:number, transactionReport: Report) {
         let daysPaid = 1;
         if (transactionReport.status === Status.FAILED) {
             daysPaid = 0;
