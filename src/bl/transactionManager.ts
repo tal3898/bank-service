@@ -14,7 +14,7 @@ export class TransactionManager {
     }
 
     performAdvanceTransaction( sourceBank: string, destBank: string, amount: number ) {
-        const transactionId = this.processor.perform_transaction(sourceBank, destBank, amount/DEBIT_DAYS, 'debit');
+        const transactionId = this.processor.perform_transaction(sourceBank, destBank, amount/config.debitDays, 'debit');
         const transactionReports = this.processor.download_report();
         const currTransactionReport = transactionReports.find((currReport) => currReport.transactionId === transactionId);
 
