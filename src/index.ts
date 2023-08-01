@@ -1,14 +1,16 @@
 import {Connection} from './dal/connection';
 import express from 'express';
-import cors from 'cors';
 import bodyParser from 'body-parser';
 import { NewTransaction } from './models/apiTypes/newTransaction';
-
+import config from './config'
 
 async function main() {
     const app = express();
     const port = 3000;
-    
+
+    console.log(config)
+
+
     app.use(bodyParser.json());
 
     const dbConnection = new Connection();

@@ -4,9 +4,7 @@ import { Processor } from "./processor";
 import { Transaction } from "../models/transaction";
 import { Status } from "../models/status";
 import { Report } from "../models/report";
-
-const DEBIT_DAYS = 12;
-const DEBIT_DAYS_INTERVAL = 7;
+import config from '../config'
 
 export class TransactionManager {
     private processor: Processor;
@@ -34,7 +32,7 @@ export class TransactionManager {
         }
 
         const nextDateToPay = new Date();
-        nextDateToPay.setDate(nextDateToPay.getDate() + DEBIT_DAYS_INTERVAL);
+        nextDateToPay.setDate(nextDateToPay.getDate() + config.debitDaysInterval);
         nextDateToPay.setHours(0, 0, 0, 0);
 
         const newTransactionToSave: Transaction = {
@@ -42,7 +40,7 @@ export class TransactionManager {
             sourceBank,
             destBank,
             daysPaid: daysPaid,
-            daysToDebit: DEBIT_DAYS,
+            daysToDebit: config.debitDays,
             nextDateToPay: nextDateToPay
         }
 
