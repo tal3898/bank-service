@@ -1,4 +1,5 @@
 import { Db, MongoClient } from 'mongodb';
+import config from '../config';
 
 export class Connection {
   // Connection URL
@@ -10,8 +11,8 @@ export class Connection {
    private db: Db | undefined;
 
    constructor() {
-    this.url = 'mongodb://localhost:27017';
-    this.dbName = 'bank';
+    this.url = config.dbUrl;
+    this.dbName = config.dbName;
     this.client = new MongoClient(this.url);
    }
 

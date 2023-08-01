@@ -8,9 +8,6 @@ async function main() {
     const app = express();
     const port = 3000;
 
-    console.log(config)
-
-
     app.use(bodyParser.json());
 
     const dbConnection = new Connection();
