@@ -44,6 +44,11 @@ export class TransactionManager {
             nextDateToPay: nextDateToPay
         }
 
-        this.transactionCollection.insertTransaction(newTransactionToSave);
+        try {
+            this.transactionCollection.insertTransaction(newTransactionToSave);
+        } catch(error) {
+            console.error({message: 'transaction was commited but was not saved in db. meaning it wont debit the next time.', 
+                error})
+        }
     }
 }
