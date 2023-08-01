@@ -6,6 +6,7 @@ import { Status } from "../models/status";
 import { Report } from "../models/report";
 
 const DEBIT_DAYS = 12;
+const DEBIT_DAYS_INTERVAL = 7;
 
 export class TransactionManager {
     private processor: Processor;
@@ -23,22 +24,23 @@ export class TransactionManager {
             throw new Error('Transaction ' + transactionId + ' was not processed.')
         }
 
-        this.handleTransaction(transactionId, amount, currTransactionReport);
+        this.handleTransaction(transactionId, sourceBank, destBank, amount, currTransactionReport);
     }
 
-    private handleTransaction(transactionId:string, amount:number, transactionReport: Report) {
+    private handleTransaction(transactionId:string, sourceBank:string, destBank: string, amount:number, transactionReport: Report) {
         let daysPaid = 1;
         if (transactionReport.status === Status.FAILED) {
             daysPaid = 0;
         }
 
         const nextDateToPay = new Date();
-        nextDateToPay.setDate(nextDateToPay.getDate() + 1);
+        nextDateToPay.setDate(nextDateToPay.getDate() + DEBIT_DAYS_INTERVAL);
         nextDateToPay.setHours(0, 0, 0, 0);
 
         const newTransactionToSave: Transaction = {
-            id: transactionId,
             amount,
+            sourceBank,
+            destBank,
             daysPaid: daysPaid,
             daysToDebit: DEBIT_DAYS,
             nextDateToPay: nextDateToPay
