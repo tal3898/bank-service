@@ -2,10 +2,7 @@ import { Db, MongoClient } from 'mongodb';
 import config from '../config';
 
 export class Connection {
-  // Connection URL
    private url: string;
-  
-  // Database Name
    private dbName: string;
    private client: MongoClient
    private db: Db | undefined;
@@ -28,5 +25,4 @@ export class Connection {
   dbConnector() {
     return this.db;
   }
-
 }
